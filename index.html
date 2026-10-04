@@ -8,43 +8,66 @@
 </head>
 <body>
 
-  <div class="page">
+  <div class="container">
 
-    <section class="hero">
-      <div class="photo">
-        <img src="images/photo.jpg" alt="Григорий Семёнов">
-      </div>
-      <div class="hero-text">
+    <div class="photo">
+      <img src="images/photo.jpg" alt="Григорий Семёнов">
+    </div>
+
+    <div class="content">
+
+      <div class="block heading-block">
         <h1>Григорий Семёнов</h1>
-        <p class="role">UX/UI дизайнер · 4 года в продуктовом дизайне</p>
-        <p class="desc">Проектирую продукты со сложной логикой: интерфейсы с ИИ, большие массивы данных, оптимизация выбора конфигураций, дашборды, ролевые модели и административные панели.</p>
-        <p class="process"><strong>Процесс:</strong> формулирую гипотезу → прорабатываю несколько вариантов решения → защищаю выбор на дизайн-ревью → передаю в разработку → проверяю результат метриками и обращаемостью в поддержку.</p>
+        <p class="role">UX/UI Designer</p>
+        <span class="tag">UX/UI Designer</span>
       </div>
-    </section>
 
-    <section class="cases">
-
-      <button class="case-card" data-popup="esp">
-        <div class="preview">превью кейса</div>
-        <div class="info">
-          <p class="title">Единая Сервисная Платформа</p>
-          <p class="subtitle">Личные кабинеты для кассового B2B-продукта: от MVP до экосистемы из нескольких ролей</p>
+      <div class="block tabs-block">
+        <div class="tabs">
+          <button class="tab active" data-tab="about">Обо мне</button>
+          <button class="tab" data-tab="process">Процесс работы</button>
+          <button class="tab" data-tab="stack">Стэк</button>
+          <button class="tab" data-tab="contacts">Контакты</button>
         </div>
-      </button>
-
-      <button class="case-card" data-popup="sensei">
-        <div class="preview">превью кейса</div>
-        <div class="info">
-          <p class="title">Sensei GPT</p>
-          <p class="subtitle">Сервис для учителей с интеграцией ИИ: автоматизация рутинных задач</p>
+        <div class="tab-content">
+          <div class="tab-pane active" id="about">
+            <p>4 года в дизайне B2B, B2C продуктов. Специализируюсь на личных кабинетах: дашборды, большие массивы данных, интерфейсы с AI, ролевые модели, флоу выбора конфигураций, поддержка и чаты, административные панели.</p>
+          </div>
+          <div class="tab-pane" id="process">
+            <p>Текст про процесс работы.</p>
+          </div>
+          <div class="tab-pane" id="stack">
+            <p>Текст про стэк.</p>
+          </div>
+          <div class="tab-pane" id="contacts">
+            <p>Текст про контакты.</p>
+          </div>
         </div>
-      </button>
+      </div>
 
-    </section>
+      <div class="block cards-block">
+        <button class="case-card" data-popup="esp">
+          <div class="preview">превью кейса</div>
+          <div class="info">
+            <p class="title">Единая Сервисная Платформа</p>
+            <p class="subtitle">Личные кабинеты для кассового B2B-продукта: от MVP до экосистемы из нескольких ролей</p>
+          </div>
+        </button>
+
+        <button class="case-card" data-popup="sensei">
+          <div class="preview">превью кейса</div>
+          <div class="info">
+            <p class="title">Sensei GPT</p>
+            <p class="subtitle">Сервис для учителей с интеграцией ИИ: автоматизация рутинных задач</p>
+          </div>
+        </button>
+      </div>
+
+    </div>
 
   </div>
 
-  <!-- Popup: ЕСП (заглушка, наполним позже) -->
+  <!-- Popup: ЕСП -->
   <div class="overlay" id="popup-esp">
     <div class="popup">
       <button class="close-btn" aria-label="Закрыть">×</button>
@@ -59,25 +82,25 @@
     <div class="popup">
       <button class="close-btn" aria-label="Закрыть">×</button>
       <div class="strip">
-        <a href="images/Slice_1.png" target="_blank"><img src="images/Slice_1.png" alt=""></a>
-        <a href="images/Slice_2.png" target="_blank"><img src="images/Slice_2.png" alt=""></a>
-        <a href="images/Slice_3.png" target="_blank"><img src="images/Slice_3.png" alt=""></a>
-        <a href="images/Slice_4.png" target="_blank"><img src="images/Slice_4.png" alt=""></a>
-        <a href="images/Slice_5.png" target="_blank"><img src="images/Slice_5.png" alt=""></a>
-        <a href="images/Slice_6.png" target="_blank"><img src="images/Slice_6.png" alt=""></a>
-        <a href="images/Slice_7.png" target="_blank"><img src="images/Slice_7.png" alt=""></a>
-        <a href="images/Slice_8.png" target="_blank"><img src="images/Slice_8.png" alt=""></a>
-        <a href="images/Slice_9.png" target="_blank"><img src="images/Slice_9.png" alt=""></a>
-        <a href="images/Slice_10.png" target="_blank"><img src="images/Slice_10.png" alt=""></a>
-        <a href="images/Slice_11.png" target="_blank"><img src="images/Slice_11.png" alt=""></a>
-        <a href="images/Slice_12.png" target="_blank"><img src="images/Slice_12.png" alt=""></a>
-        <a href="images/Slice_13.png" target="_blank"><img src="images/Slice_13.png" alt=""></a>
-        <a href="images/Slice_14.png" target="_blank"><img src="images/Slice_14.png" alt=""></a>
-        <a href="images/Slice_15.png" target="_blank"><img src="images/Slice_15.png" alt=""></a>
-        <a href="images/Slice_16.png" target="_blank"><img src="images/Slice_16.png" alt=""></a>
-        <a href="images/Slice_17.png" target="_blank"><img src="images/Slice_17.png" alt=""></a>
-        <a href="images/Slice_18.png" target="_blank"><img src="images/Slice_18.png" alt=""></a>
-        <a href="images/Slice_19.png" target="_blank"><img src="images/Slice_19.png" alt=""></a>
+        <img src="images/Slice_1.png" alt="">
+        <img src="images/Slice_2.png" alt="">
+        <img src="images/Slice_3.png" alt="">
+        <img src="images/Slice_4.png" alt="">
+        <img src="images/Slice_5.png" alt="">
+        <img src="images/Slice_6.png" alt="">
+        <img src="images/Slice_7.png" alt="">
+        <img src="images/Slice_8.png" alt="">
+        <img src="images/Slice_9.png" alt="">
+        <img src="images/Slice_10.png" alt="">
+        <img src="images/Slice_11.png" alt="">
+        <img src="images/Slice_12.png" alt="">
+        <img src="images/Slice_13.png" alt="">
+        <img src="images/Slice_14.png" alt="">
+        <img src="images/Slice_15.png" alt="">
+        <img src="images/Slice_16.png" alt="">
+        <img src="images/Slice_17.png" alt="">
+        <img src="images/Slice_18.png" alt="">
+        <img src="images/Slice_19.png" alt="">
       </div>
     </div>
   </div>

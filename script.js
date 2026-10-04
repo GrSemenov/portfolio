@@ -1,3 +1,12 @@
+document.querySelectorAll('.tab').forEach(function (tab) {
+  tab.addEventListener('click', function () {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+
 document.querySelectorAll('.case-card').forEach(function (card) {
   card.addEventListener('click', function () {
     var id = card.getAttribute('data-popup');
@@ -13,7 +22,6 @@ document.querySelectorAll('.overlay').forEach(function (overlay) {
       overlay.classList.remove('open');
     });
   }
-  // закрытие по клику на затемнённый фон
   overlay.addEventListener('click', function (e) {
     if (e.target === overlay) overlay.classList.remove('open');
   });

@@ -1,74 +1,130 @@
 :root {
-  --accent: #E8763A;
-  --accent-bg: #FDECE3;
-  --text: #1A1A1A;
-  --muted: #666;
-  --bg: #F7F6F3;
+  --accent: #EC8848;
+  --accent-bg: #F9E1D1;
+  --text: #091F2C;
+  --page-bg: #FFFFFF;
+  --container-bg: #FDFDFD;
 }
 * { box-sizing: border-box; }
-body {
+html, body {
   margin: 0;
+  background: var(--page-bg);
   font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: var(--bg);
-  padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
-.page {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 32px 20px;
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
-/* Hero */
-.hero {
-  background: #fff;
-  border-radius: 16px;
-  padding: 40px 36px;
-  display: flex;
-  gap: 28px;
-  align-items: center;
-  margin-bottom: 20px;
+/* Breakpoint padding around container: 1280–1599 → sides 40 / top-bottom 60; ≥1600 → 80 / 80 */
+@media (min-width: 1280px) and (max-width: 1599px) {
+  body { padding: 60px 40px; }
 }
-.hero .photo {
-  width: 104px;
-  height: 104px;
-  border-radius: 50%;
-  overflow: hidden;
+@media (min-width: 1600px) {
+  body { padding: 80px; }
+}
+
+.container {
+  background: var(--container-bg);
+  border-radius: 60px;
+  box-shadow:
+    0 8px 24px rgba(236, 136, 72, 0.12),
+    0 8px 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  overflow: hidden; /* clips photo to rounded left corners */
+}
+
+/* Left: photo, fixed width, flush to container edges */
+.photo {
+  width: 389px;
   flex-shrink: 0;
 }
-.hero .photo img {
+.photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-.hero h1 {
-  font-size: 22px;
-  font-weight: 500;
-  margin: 0 0 4px;
-  color: var(--text);
-}
-.hero .role {
-  font-size: 15px;
-  color: var(--muted);
-  margin: 0 0 12px;
-}
-.hero .desc {
-  font-size: 14px;
-  color: #444;
-  line-height: 1.6;
-  margin: 0 0 12px;
-}
-.hero .process {
-  font-size: 13px;
-  color: #555;
-  line-height: 1.6;
-  margin: 0;
+  display: block;
 }
 
-/* Case cards */
-.cases {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* Right: content column with 3 blocks, 60px gap */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  padding: 60px 60px 60px 48px;
+}
+
+/* Block 1: heading */
+.heading-block h1 {
+  margin: 0 0 4px;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--text);
+}
+.heading-block .role {
+  margin: 0 0 14px;
+  font-size: 15px;
+  color: #666;
+}
+.tag {
+  display: inline-block;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+/* Block 2: tabs */
+.tabs {
+  display: flex;
+  gap: 32px;
+  border-bottom: 1px solid #ECECEC;
+}
+.tab {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: inherit;
+  color: #999;
+  padding: 0 0 12px;
+  position: relative;
+}
+.tab.active {
+  color: var(--accent);
+}
+.tab.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--accent);
+}
+.tab-content {
+  margin-top: 32px;
+}
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+.tab-pane p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Block 3: cards, stacked vertically */
+.cards-block {
+  display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 .case-card {
@@ -80,9 +136,11 @@ body {
   text-align: left;
   padding: 0;
   font-family: inherit;
+  display: flex;
 }
 .case-card .preview {
-  height: 160px;
+  width: 160px;
+  flex-shrink: 0;
   background: linear-gradient(135deg, #F2A15C, var(--accent));
   display: flex;
   align-items: center;
@@ -99,12 +157,12 @@ body {
 }
 .case-card .subtitle {
   font-size: 13px;
-  color: var(--muted);
+  color: #666;
   margin: 0;
   line-height: 1.5;
 }
 
-/* Popup */
+/* Popup (unchanged behaviour) */
 .overlay {
   display: none;
   position: fixed;
@@ -151,8 +209,9 @@ body {
 .strip { display: flex; flex-direction: column; margin-top: -40px; }
 .strip img { width: 100%; display: block; }
 
-/* Mobile */
-@media (max-width: 640px) {
-  .hero { flex-direction: column; text-align: center; }
-  .cases { grid-template-columns: 1fr; }
+/* Mobile fallback */
+@media (max-width: 900px) {
+  .container { flex-direction: column; }
+  .photo { width: 100%; height: 240px; }
+  .content { padding: 32px; gap: 40px; }
 }
