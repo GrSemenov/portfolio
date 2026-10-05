@@ -139,38 +139,53 @@ body {
   gap: 20px;
 }
 .case-card {
-  background: #fff;
-  border-radius: 16px;
-  overflow: hidden;
+  background: #FFFFFF;
+  border: 1px solid #E7E7E7;
+  border-radius: 32px;
   cursor: pointer;
-  border: none;
   text-align: left;
-  padding: 0;
   font-family: inherit;
   display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 24px 16px 16px 16px;
+  transition: border-color .15s ease, box-shadow .15s ease, background .1s ease;
 }
-.case-card .preview {
-  width: 160px;
-  flex-shrink: 0;
-  background: linear-gradient(135deg, #F2A15C, var(--accent));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 13px;
+.case-card:hover {
+  border-color: #F9AB76;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.30),
+    0 2px 6px 2px rgba(0, 0, 0, 0.15);
 }
-.case-card .info { padding: 20px; }
-.case-card .title {
+.case-card:active {
+  background: #E7E7E7;
+}
+.case-logo {
+  width: 120px;
+  height: 74px;
+  object-fit: contain;
+  display: block;
+}
+.case-text {
+  margin: 0;
   font-size: 16px;
+  line-height: 24px;
   font-weight: 500;
-  margin: 0 0 6px;
   color: var(--text);
 }
-.case-card .subtitle {
-  font-size: 13px;
-  color: #666;
-  margin: 0;
-  line-height: 1.5;
+.case-tags {
+  display: flex;
+  gap: 8px;
+}
+.case-tag {
+  display: inline-block;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  padding: 2px 14px;
+  border-radius: 20px;
 }
 
 /* Popup (unchanged behaviour) */
