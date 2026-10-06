@@ -137,7 +137,7 @@ body {
 /* Contacts tab */
 .contacts-wrap {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 48px;
 }
 .contact-group {
