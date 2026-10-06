@@ -134,6 +134,46 @@ body {
   color: #333;
 }
 
+/* Contacts tab */
+.contacts-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+.contact-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+}
+.contact-code {
+  width: auto;
+  height: 72px;
+  flex-shrink: 0;
+}
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.contact-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.contact-row span {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+  color: var(--text);
+}
+
 /* Block 3: cards, stacked vertically */
 .cards-block {
   display: flex;
@@ -151,7 +191,7 @@ body {
   flex-direction: row;
   align-items: center;
   gap: 40px;
-  padding: 24px 16px 16px 16px;
+  padding: 16px 16px 16px 24px;
   transition: border-color .15s ease, box-shadow .15s ease, background .1s ease;
 }
 .case-card:hover {
