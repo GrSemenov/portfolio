@@ -61,8 +61,13 @@ body {
 }
 
 /* Block 1: heading */
+.heading-block {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
 .heading-block h1 {
-  margin: 0 0 4px;
+  margin: 0;
   font-size: 36px;
   line-height: 44px;
   font-weight: 700;
@@ -176,7 +181,7 @@ body {
 .case-tags {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: 8px;
   flex-shrink: 0;
   margin-left: auto;
