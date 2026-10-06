@@ -17,6 +17,17 @@ document.querySelectorAll('.tab').forEach(function (tab) {
     document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById(tab.dataset.tab).classList.add('active');
+
+    var cardsBlock = document.querySelector('.cards-block');
+    var tabContent = document.querySelector('.tab-content');
+    if (tab.dataset.tab === 'process') {
+      // на вкладке "Процесс работы" карточки скрыты, высота текста свободная
+      if (cardsBlock) cardsBlock.style.display = 'none';
+      if (tabContent) tabContent.style.height = 'auto';
+    } else {
+      if (cardsBlock) cardsBlock.style.display = '';
+      lockTabContentHeight();
+    }
   });
 });
 
