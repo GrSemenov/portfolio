@@ -1,3 +1,16 @@
+// Фиксируем высоту блока под вкладками по высоте текста "Обо мне",
+// чтобы при переключении вкладок подложка не меняла размер
+function lockTabContentHeight() {
+  var tabContent = document.querySelector('.tab-content');
+  var aboutPane = document.getElementById('about');
+  if (!tabContent || !aboutPane) return;
+  tabContent.style.height = 'auto';
+  var h = aboutPane.offsetHeight;
+  tabContent.style.height = h + 'px';
+}
+window.addEventListener('load', lockTabContentHeight);
+window.addEventListener('resize', lockTabContentHeight);
+
 document.querySelectorAll('.tab').forEach(function (tab) {
   tab.addEventListener('click', function () {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
