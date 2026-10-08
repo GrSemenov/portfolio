@@ -1,15 +1,43 @@
-// Фиксируем высоту блока под вкладками по высоте текста "Обо мне",
-// чтобы при переключении вкладок подложка не меняла размер
+// Измеряем высоту панели, даже если она сейчас скрыта (display:none)
+function measurePane(pane) {
+  var wasActive = pane.classList.contains('active');
+  var prevStyle = pane.getAttribute('style');
+  if (!wasActive) {
+    pane.style.display = 'block';
+    pane.style.visibility = 'hidden';
+    pane.style.position = 'absolute';
+    pane.style.left = '0';
+    pane.style.right = '0';
+  }
+  var h = pane.offsetHeight;
+  if (!wasActive) {
+    if (prevStyle === null) pane.removeAttribute('style');
+    else pane.setAttribute('style', prevStyle);
+  }
+  return h;
+}
+
+// Фиксируем высоту блока под вкладками по самой высокой из вкладок
+// (Обо мне, Стэк, Контакты), чтобы при переключении подложка не прыгала
 function lockTabContentHeight() {
   var tabContent = document.querySelector('.tab-content');
-  var aboutPane = document.getElementById('about');
-  if (!tabContent || !aboutPane) return;
-  tabContent.style.height = 'auto';
-  var h = aboutPane.offsetHeight;
-  tabContent.style.height = h + 'px';
+  if (!tabContent) return;
+  var activeTab = document.querySelector('.tab.active');
+  if (activeTab && activeTab.dataset.tab === 'process') return;
+
+  tabContent.style.position = 'relative';
+  var max = 0;
+  ['about', 'stack', 'contacts'].forEach(function (id) {
+    var pane = document.getElementById(id);
+    if (pane) max = Math.max(max, measurePane(pane));
+  });
+  tabContent.style.height = max + 'px';
 }
 window.addEventListener('load', lockTabContentHeight);
 window.addEventListener('resize', lockTabContentHeight);
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(lockTabContentHeight);
+}
 
 document.querySelectorAll('.tab').forEach(function (tab) {
   tab.addEventListener('click', function () {
