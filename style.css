@@ -35,7 +35,7 @@ body {
     0 8px 8px rgba(0, 0, 0, 0.04);
   display: flex;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1440px;
   overflow: hidden; /* clips photo to rounded left corners */
 }
 
