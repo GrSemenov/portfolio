@@ -17,17 +17,20 @@ function measurePane(pane) {
   return h;
 }
 
-// Фиксируем высоту блока под вкладками по самой высокой из вкладок
-// (Обо мне, Стэк, Контакты), чтобы при переключении подложка не прыгала
+// Вкладки, на которых карточки проектов скрыты, а высота текста свободная
+var TABS_WITHOUT_CARDS = ['process', 'stack'];
+
+// Фиксируем высоту блока под вкладками по самой высокой из вкладок с карточками
+// (Обо мне, Контакты), чтобы при переключении подложка не прыгала
 function lockTabContentHeight() {
   var tabContent = document.querySelector('.tab-content');
   if (!tabContent) return;
   var activeTab = document.querySelector('.tab.active');
-  if (activeTab && activeTab.dataset.tab === 'process') return;
+  if (activeTab && TABS_WITHOUT_CARDS.indexOf(activeTab.dataset.tab) !== -1) return;
 
   tabContent.style.position = 'relative';
   var max = 0;
-  ['about', 'stack', 'contacts'].forEach(function (id) {
+  ['about', 'contacts'].forEach(function (id) {
     var pane = document.getElementById(id);
     if (pane) max = Math.max(max, measurePane(pane));
   });
@@ -48,8 +51,8 @@ document.querySelectorAll('.tab').forEach(function (tab) {
 
     var cardsBlock = document.querySelector('.cards-block');
     var tabContent = document.querySelector('.tab-content');
-    if (tab.dataset.tab === 'process') {
-      // на вкладке "Процесс работы" карточки скрыты, высота текста свободная
+    if (TABS_WITHOUT_CARDS.indexOf(tab.dataset.tab) !== -1) {
+      // на вкладках "Процесс работы" и "Стэк" карточки скрыты, высота свободная
       if (cardsBlock) cardsBlock.style.display = 'none';
       if (tabContent) tabContent.style.height = 'auto';
     } else {
