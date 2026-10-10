@@ -4,6 +4,7 @@
   --text: #091F2C;
   --page-bg: #FFFFFF;
   --container-bg: #FDFDFD;
+  --anim: .45s cubic-bezier(.4, 0, .2, 1);
 }
 * { box-sizing: border-box; }
 html, body {
@@ -14,7 +15,7 @@ html, body {
 body {
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   padding: 20px;
 }
@@ -146,6 +147,55 @@ body {
 }
 .tab-pane p:last-child {
   margin-bottom: 0;
+}
+
+/* Вкладка "Обо мне": свёртка / развёртка текста */
+.tab-content.animating {
+  transition: height var(--anim);
+}
+#about p {
+  margin: 0;
+}
+.more-btn {
+  display: block;
+  width: fit-content;
+  margin: 12px 0 0;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: var(--accent);
+  transition: color .15s ease;
+}
+.more-btn:hover,
+.more-btn:focus-visible {
+  color: #F9AB76;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.more-btn:focus-visible {
+  outline: none;
+}
+.about-more {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+  opacity: 0;
+  transition: opacity var(--anim);
+}
+.about-more.open {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tab-content.animating,
+  .about-more {
+    transition: none;
+  }
 }
 
 /* Contacts tab */
@@ -394,7 +444,7 @@ body {
   /* Лицевая сторона */
   .content {
     background: var(--container-bg);
-    border-radius: 60px;
+    border-radius: 20px;
     box-shadow:
       0 8px 24px rgba(236, 136, 72, 0.12),
       0 8px 8px rgba(0, 0, 0, 0.04);
@@ -411,7 +461,7 @@ body {
     width: auto;
     height: auto;
     background: var(--container-bg);
-    border-radius: 60px;
+    border-radius: 20px;
     overflow: hidden;
     box-shadow:
       0 8px 24px rgba(236, 136, 72, 0.12),
@@ -441,8 +491,12 @@ body {
     font-size: 32px;
     line-height: 40px;
   }
+  .tag-row {
+    width: 100%;
+  }
   .flip-btn {
     display: block;
+    margin-left: auto;
     position: relative;
     width: 24px;
     height: 24px;
@@ -499,6 +553,7 @@ body {
     align-items: center;
     gap: 12px;
     padding: 16px;
+    border-radius: 20px;
   }
   .case-logo {
     grid-area: logo;
