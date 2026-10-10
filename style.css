@@ -76,6 +76,14 @@ body {
   font-weight: 700;
   color: var(--text);
 }
+.tag-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.flip-btn {
+  display: none; /* кнопка переворота нужна только на мобильной версии */
+}
 .tag {
   display: inline-block;
   width: fit-content;
@@ -352,4 +360,170 @@ body {
   .photo { width: 100%; height: 240px; }
   .content { padding: 32px; gap: 40px; }
   .stack-grid { grid-template-columns: 1fr; }
+}
+
+
+/* ============================================================
+   Mobile (до 767px)
+   Отступы контейнера от экрана: 16 по бокам / 24 сверху и снизу
+   Внутренние отступы контейнера: 20 по бокам / 24 сверху и снизу
+   Фото уходит на оборот карточки (переворот по иконке flip)
+   ============================================================ */
+@media (max-width: 767px) {
+  body {
+    padding: 24px 16px;
+  }
+
+  /* Контейнер превращается в переворачиваемую карточку */
+  .container {
+    display: block;
+    position: relative;
+    max-width: none;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible; /* иначе overflow:hidden сплющит 3D-трансформацию */
+    transform-style: preserve-3d;
+    transform: perspective(1600px) rotateY(0deg);
+    transition: transform .6s ease;
+  }
+  .container.flipped {
+    transform: perspective(1600px) rotateY(180deg);
+  }
+
+  /* Лицевая сторона */
+  .content {
+    background: var(--container-bg);
+    border-radius: 60px;
+    box-shadow:
+      0 8px 24px rgba(236, 136, 72, 0.12),
+      0 8px 8px rgba(0, 0, 0, 0.04);
+    padding: 24px 20px;
+    gap: 20px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  /* Оборот: фото на всю карточку */
+  .photo {
+    position: absolute;
+    inset: 0;
+    width: auto;
+    height: auto;
+    background: var(--container-bg);
+    border-radius: 60px;
+    overflow: hidden;
+    box-shadow:
+      0 8px 24px rgba(236, 136, 72, 0.12),
+      0 8px 8px rgba(0, 0, 0, 0.04);
+    transform: rotateY(180deg);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    cursor: pointer;
+  }
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .container:not(.flipped) .photo,
+  .container.flipped .content {
+    pointer-events: none;
+  }
+
+  /* Имя, тег и иконка переворота */
+  .heading-block {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .heading-block h1 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  .flip-btn {
+    display: block;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .flip-btn img {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+  /* зона нажатия 40x40 при визуальном размере иконки 24 */
+  .flip-btn::after {
+    content: "";
+    position: absolute;
+    inset: -8px;
+  }
+
+  /* Вкладки: высота 40px под тап, при нехватке ширины — горизонтальная прокрутка */
+  .tabs {
+    gap: 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .tab {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 0;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .tab.active::after {
+    bottom: 0;
+  }
+  .tab-content {
+    margin-top: 20px;
+  }
+
+  /* Карточки проектов: вертикально, паддинг 16, гэп 12.
+     Первый блок — логотип и теги в одну строку, ниже текст */
+  .case-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "logo tags"
+      "text text";
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+  }
+  .case-logo {
+    grid-area: logo;
+    justify-self: start;
+    width: auto;
+    height: 60px;
+    max-width: 100%;
+  }
+  .case-tags {
+    grid-area: tags;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: 0;
+  }
+  .case-text {
+    grid-area: text;
+  }
+
+  .stack-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .container { transition: none; }
 }

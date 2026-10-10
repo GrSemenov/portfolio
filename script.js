@@ -81,3 +81,48 @@ document.querySelectorAll('.overlay').forEach(function (overlay) {
     if (e.target === overlay) overlay.classList.remove('open');
   });
 });
+
+// Мобильная версия: переворот карточки (фото находится на обороте)
+(function () {
+  var container = document.querySelector('.container');
+  var content = document.querySelector('.content');
+  var photo = document.querySelector('.photo');
+  var flipBtn = document.querySelector('.flip-btn');
+  if (!container || !content || !photo || !flipBtn) return;
+
+  var mq = window.matchMedia('(max-width: 767px)');
+
+  function setFlipped(on) {
+    var flipped = on && mq.matches;
+    container.classList.toggle('flipped', flipped);
+    // скрытая сторона недоступна для фокуса и скринридеров
+    content.inert = mq.matches && flipped;
+    photo.inert = mq.matches && !flipped;
+  }
+
+  function syncPhotoRole() {
+    if (mq.matches) {
+      photo.setAttribute('role', 'button');
+      photo.setAttribute('tabindex', '0');
+      photo.setAttribute('aria-label', 'Вернуть карточку');
+    } else {
+      photo.removeAttribute('role');
+      photo.removeAttribute('tabindex');
+      photo.removeAttribute('aria-label');
+    }
+    setFlipped(false);
+  }
+
+  flipBtn.addEventListener('click', function () { setFlipped(true); });
+  photo.addEventListener('click', function () { if (mq.matches) setFlipped(false); });
+  photo.addEventListener('keydown', function (e) {
+    if (mq.matches && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      setFlipped(false);
+    }
+  });
+
+  if (mq.addEventListener) mq.addEventListener('change', syncPhotoRole);
+  else if (mq.addListener) mq.addListener(syncPhotoRole);
+  syncPhotoRole();
+})();
