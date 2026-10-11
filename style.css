@@ -226,6 +226,19 @@ body {
   object-fit: contain;
   flex-shrink: 0;
 }
+.stack-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.stack-title {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: #333;
+}
 .stack-item p {
   margin: 0;
 }
@@ -444,11 +457,11 @@ body {
   /* Лицевая сторона */
   .content {
     background: var(--container-bg);
-    border-radius: 20px;
+    border-radius: 32px;
     box-shadow:
       0 8px 24px rgba(236, 136, 72, 0.12),
       0 8px 8px rgba(0, 0, 0, 0.04);
-    padding: 24px 20px;
+    padding: 24px 20px 20px;
     gap: 20px;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
@@ -461,7 +474,7 @@ body {
     width: auto;
     height: auto;
     background: var(--container-bg);
-    border-radius: 20px;
+    border-radius: 32px;
     overflow: hidden;
     box-shadow:
       0 8px 24px rgba(236, 136, 72, 0.12),
