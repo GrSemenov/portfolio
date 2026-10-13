@@ -161,11 +161,28 @@ document.querySelectorAll('.tab').forEach(function (tab) {
   });
 });
 
+// Открытие / закрытие попапов. Видео внутри попапа запускается при открытии
+// и ставится на паузу с возвратом к началу при закрытии
+function setOverlayOpen(overlay, open) {
+  overlay.classList.toggle('open', open);
+  overlay.querySelectorAll('video').forEach(function (v) {
+    if (open) {
+      if (!reduceMotion.matches) {
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      }
+    } else {
+      v.pause();
+      v.currentTime = 0;
+    }
+  });
+}
+
 document.querySelectorAll('.case-card').forEach(function (card) {
   card.addEventListener('click', function () {
     var id = card.getAttribute('data-popup');
     var overlay = document.getElementById('popup-' + id);
-    if (overlay) overlay.classList.add('open');
+    if (overlay) setOverlayOpen(overlay, true);
   });
 });
 
@@ -173,11 +190,22 @@ document.querySelectorAll('.overlay').forEach(function (overlay) {
   var closeBtn = overlay.querySelector('.close-btn');
   if (closeBtn) {
     closeBtn.addEventListener('click', function () {
-      overlay.classList.remove('open');
+      setOverlayOpen(overlay, false);
     });
   }
   overlay.addEventListener('click', function (e) {
-    if (e.target === overlay) overlay.classList.remove('open');
+    if (e.target === overlay) setOverlayOpen(overlay, false);
+  });
+  // клик по видео — пауза / продолжить
+  overlay.querySelectorAll('video').forEach(function (v) {
+    v.addEventListener('click', function () {
+      if (v.paused) {
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      } else {
+        v.pause();
+      }
+    });
   });
 });
 

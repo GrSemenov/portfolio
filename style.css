@@ -417,6 +417,19 @@ body {
 .strip { display: flex; flex-direction: column; margin-top: -40px; }
 .strip img { width: 100%; display: block; }
 
+/* Видео поверх слайса: координаты от слайса 1920x1000 переведены в проценты,
+   чтобы видео масштабировалось вместе с картинкой */
+.slide-media { position: relative; }
+.slide-video {
+  position: absolute;
+  left: 54.4271%;  /* 1045 / 1920 */
+  top: 53.8%;      /* 538 / 1000 */
+  width: 36.875%;  /* 708 / 1920 */
+  height: 44.6%;   /* 446 / 1000 */
+  object-fit: cover;
+  cursor: pointer;
+}
+
 /* Mobile fallback */
 @media (max-width: 900px) {
   .container { flex-direction: column; }
